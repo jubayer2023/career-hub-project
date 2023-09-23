@@ -4,13 +4,11 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import Root from "./components/Root/Root";
 
-
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./components/Home/Home";
 import Appliedjobs from "./components/Appliedjobs/Appliedjobs";
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import JobDetails from "./components/JobDetails/JobDetails";
-
 
 const router = createBrowserRouter([
   {
@@ -20,18 +18,19 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home></Home>
+        element: <Home></Home>,
       },
       {
         path: "/applied",
-        element: <Appliedjobs></Appliedjobs>
+        element: <Appliedjobs></Appliedjobs>,
+        loader: () => fetch(`/jobs.json`),
       },
       {
         path: "/job/:id",
         element: <JobDetails></JobDetails>,
-        loader:() => fetch(`../jobs.json`)
-      }
-    ]
+        loader: () => fetch(`/jobs.json`),
+      },
+    ],
   },
 ]);
 
